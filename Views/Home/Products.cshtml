@@ -1,0 +1,82 @@
+﻿@using ProdCat.Models
+@model Product
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Available Products</title>
+    <style>
+        .newproduct{
+            display: inline-block;
+            margin-right: 20px;
+        }
+        .allproducts{
+            display: inline-block;
+            padding-left: 20px;
+            border-left: 1px solid black;
+            vertical-align: top;
+        }
+        .header{
+            margin-bottom: 20px;
+            margin-left: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="/products">Products</a> | <a href="/categories">Categories</a>
+    </div>
+    <div class="newproduct">
+        <h2>Add a New Product</h2>
+        <form action="/newproduct" method="post">
+            <span asp-validation-for="Name"></span>
+            <label>Product Name:</label>
+            <input type="text" name="Name"> <br>
+            <span asp-validation-for="Description"></span>
+            <label>Description:</label>
+            <input type="text" name="Description"> <br>
+            <span asp-validation-for="Price"></span>
+            <label>Price:</label>
+            <input type="number" name="Price"> <br>
+            <button type="submit">Add Product</button>
+        </form>
+    </div>
+    <div class="allproducts">
+        <h2>All Products</h2>
+        @{
+            foreach(var prod in @ViewBag.products)
+            {
+                <a href="/products/@prod.ProductId">@prod.Name</a> <br>
+            }
+        }
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

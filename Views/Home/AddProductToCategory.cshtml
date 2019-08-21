@@ -1,0 +1,46 @@
+@using ProdCat.Models
+@model Association
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Category Page</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <h2>@ViewBag.currentcat.Name</h2> 
+        <div class="allproducts">
+            <h2>Products with this Category:</h2>
+            <ul>
+                @{
+                    foreach(var prod in @ViewBag.catprods.ProductsWithCategories)
+                    {
+                        <li>@prod.Product.Name</li>
+                    }
+                }
+            </ul>
+        </div>
+        <div class="addproduct">
+            <h2>Add Product:</h2>
+            <form action="/addproducttocategory" method="post">
+                <select asp-for="ProductId">
+                    @{
+                        int x=1;
+                        foreach(var newprod in @ViewBag.notincat)
+                        {
+                            <option value="@x">@newprod.Name</option>
+                            x++;
+                        }
+                    }
+                </select>
+                <input asp-for="CategoryId" hidden>
+                <input type="submit" value="Add">
+            </form>
+            <br>
+            <a href="/categories">Back to categories</a>
+        </div>
+    </div>
+</body>
+</html>
